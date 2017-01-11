@@ -11,19 +11,24 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	public RobotMap robotMap;
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		if (Reference.TEST_MODE) { //Checks if the program is being run in test mode
+		if(Reference.TEST_MODE) { //Checks if the program is being run in test mode
 			LiveWindow.run(); //Opens the live window (has the console and customizable information)
-			
+
 			print("Starting in test mode");
 		}
-		
-		print("Initializing robot");
+
+		print("Initializing robot for team #" + Reference.TEAM_NUMBER);
+
+		robotMap = new RobotMap();
+		robotMap.init();
 	}
 
 	/**
@@ -59,7 +64,7 @@ public class Robot extends IterativeRobot {
 	 * This function is used to send messages to the console
 	 * 
 	 * @param text
-	 *            the message
+	 * the message
 	 */
 	public static void print(String text) {
 		System.out.println(text);
