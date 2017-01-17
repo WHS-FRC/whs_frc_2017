@@ -22,7 +22,7 @@ public class CommandPrint extends Command {
 	}
 
 	@Override
-	protected void execute() {
+	protected void initialize() {
 		System.out.println(msg);
 	}
 
