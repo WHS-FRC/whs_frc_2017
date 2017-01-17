@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6750.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
@@ -11,8 +12,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	public RobotMap robotMap;
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -25,10 +24,9 @@ public class Robot extends IterativeRobot {
 			print("Starting in test mode");
 		}
 
-		print("Initializing robot for team #" + Reference.TEAM_NUMBER);
+		print("Initializing robot");
 
-		robotMap = new RobotMap();
-		robotMap.init();
+		RobotMap.init();
 	}
 
 	/**
@@ -40,17 +38,19 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called periodically during autonomous
+	 * This function is called periodically (every 20ms) during autonomous
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
 	}
 
 	/**
-	 * This function is called periodically during operator control
+	 * This function is called periodically (every 20ms) during operator control
 	 */
 	@Override
 	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
 	}
 
 	/**
