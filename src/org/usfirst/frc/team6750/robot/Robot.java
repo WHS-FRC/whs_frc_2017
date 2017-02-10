@@ -55,7 +55,7 @@ public class Robot extends SampleRobot {
 	}
 
 	private void drive() {
-		robotDrive.arcadeDrive(xboxController);
+		//robotDrive.arcadeDrive(xboxController);
 		
 		//robotDrive.setSensitivity(1D);
 		//robotDrive.setMaxOutput(1D);
@@ -71,15 +71,18 @@ public class Robot extends SampleRobot {
 		if(fastRotateAxis > slowRotateAxis) {
 			rotateSpeed = fastRotateAxis;
 		} else {
-			rotateSpeed = Math.pow(slowRotateAxis, 3);
+			rotateSpeed = slowRotateAxis / 2D;
 		}
 		
 		if(fastMoveAxis > slowMoveAxis) {
 			moveSpeed = fastMoveAxis;
 		} else {
-			moveSpeed = Math.pow(slowMoveAxis, 3);
+			moveSpeed = slowMoveAxis / 2D;
 		}
 		
 		robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+		
+		System.out.println("FAST MOVE AXIS: " + fastMoveAxis);
+		System.out.println("MOVE SPEED: " + moveSpeed);
 	}
 }
