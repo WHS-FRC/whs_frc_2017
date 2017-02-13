@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6750.robot;
 
 import static org.usfirst.frc.team6750.robot.RobotMap.*;
+import static org.usfirst.frc.team6750.robot.Settings.*;
 
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -28,61 +29,59 @@ public class Robot extends SampleRobot {
 
 	private void initRobotDrive() {
 		robotDrive.setExpiration(0.1D);
+
+		//"Who needs safety?"
+		robotDrive.setSafetyEnabled(false);
 	}
 
 	private void initMotors() {
+		//Motors were attached backwards
 		backLeftMotor.setInverted(true);
 		frontLeftMotor.setInverted(true);
 		backRightMotor.setInverted(true);
 		frontRightMotor.setInverted(true);
-
-		backLeftMotor.setSafetyEnabled(false);
-		frontLeftMotor.setSafetyEnabled(false);
-		backRightMotor.setSafetyEnabled(false);
-		frontRightMotor.setSafetyEnabled(false);
 	}
 
-	/**
-	 * Runs the motors with tank steering.
-	 */
 	@Override
 	public void operatorControl() {
 		while(isOperatorControl() && isEnabled()) {
 			drive();
 
-			Timer.delay(0.005);
+			Timer.delay(0.005D);
 		}
 	}
 
+	@Override
+	protected void disabled() {
+	}
+	
+	/**
+	 * Drives the robot
+	 */
 	private void drive() {
-		//robotDrive.arcadeDrive(xboxController);
-		
-		//robotDrive.setSensitivity(1D);
-		//robotDrive.setMaxOutput(1D);
-		
+		//Get axis values from the xbox controller
 		double fastRotateAxis = xboxController.getRawAxis(0);
 		double fastMoveAxis = xboxController.getRawAxis(1);
-		
 		double slowRotateAxis = xboxController.getRawAxis(4);
 		double slowMoveAxis = xboxController.getRawAxis(5);
-		
+
+		//Values that will eventually pass into the RobotDrive
 		double rotateSpeed = 0D, moveSpeed = 0D;
-		
-		if(fastRotateAxis > slowRotateAxis) {
+
+		//Determines whether to use the fast axis or the slow axis based on which one is faster
+		if(Math.abs(fastRotateAxis) > Math.abs(slowRotateAxis * SLOW_MOVE_MODIFIER)) {
 			rotateSpeed = fastRotateAxis;
 		} else {
-			rotateSpeed = slowRotateAxis / 2D;
+			rotateSpeed = (slowRotateAxis * SLOW_MOVE_MODIFIER);
 		}
-		
-		if(fastMoveAxis > slowMoveAxis) {
+
+		if(Math.abs(fastMoveAxis) > Math.abs(slowMoveAxis * SLOW_MOVE_MODIFIER)) {
 			moveSpeed = fastMoveAxis;
 		} else {
-			moveSpeed = slowMoveAxis / 2D;
+			moveSpeed = (slowMoveAxis * SLOW_MOVE_MODIFIER);
 		}
-		
+
+		//Send move and rotate values to the RobotDrive
 		robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
-		
-		System.out.println("FAST MOVE AXIS: " + fastMoveAxis);
-		System.out.println("MOVE SPEED: " + moveSpeed);
 	}
 }
