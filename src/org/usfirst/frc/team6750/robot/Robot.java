@@ -3,28 +3,37 @@ package org.usfirst.frc.team6750.robot;
 import static org.usfirst.frc.team6750.robot.RobotMap.*;
 import static org.usfirst.frc.team6750.robot.Settings.*;
 
-import edu.wpi.first.wpilibj.SampleRobot;
-import edu.wpi.first.wpilibj.Timer;
+import org.usfirst.frc.team6750.robot.commands.CommandGroupMove;
 
-/**
- * This is a demo program showing the use of the RobotDrive class, specifically
- * it contains the code necessary to operate a robot with tank drive.
- *
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the SampleRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- *
- * WARNING: While it may look like a good choice to use for your code if you're
- * inexperienced, don't. Unless you know what you are doing, complex code will
- * be much more difficult under this system. Use IterativeRobot or Command-Based
- * instead if you're new.
- */
-public class Robot extends SampleRobot {
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.command.Scheduler;
+
+public class Robot extends IterativeRobot {
 	public Robot() {
 		initRobotDrive();
-		initMotors();
+	}
+
+	@Override
+	public void autonomousInit() {
+		System.out.println("autonomous started");
+
+		Scheduler.getInstance().add(new CommandGroupMove(2D, 0.75D, 0D));
+	}
+
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	@Override
+	public void teleopPeriodic() {
+		while(isOperatorControl() && isEnabled()) {
+			drive();
+
+			Timer.delay(0.005D);
+		}
 	}
 
 	private void initRobotDrive() {
@@ -34,27 +43,6 @@ public class Robot extends SampleRobot {
 		robotDrive.setSafetyEnabled(false);
 	}
 
-	private void initMotors() {
-		//Motors were attached backwards
-		backLeftMotor.setInverted(true);
-		frontLeftMotor.setInverted(true);
-		backRightMotor.setInverted(true);
-		frontRightMotor.setInverted(true);
-	}
-
-	@Override
-	public void operatorControl() {
-		while(isOperatorControl() && isEnabled()) {
-			drive();
-
-			Timer.delay(0.005D);
-		}
-	}
-
-	@Override
-	protected void disabled() {
-	}
-	
 	/**
 	 * Drives the robot
 	 */
@@ -65,6 +53,7 @@ public class Robot extends SampleRobot {
 		double slowRotateAxis = xboxController.getRawAxis(4);
 		double slowMoveAxis = xboxController.getRawAxis(5);
 
+		
 		//Values that will eventually pass into the RobotDrive
 		double rotateSpeed = 0D, moveSpeed = 0D;
 
