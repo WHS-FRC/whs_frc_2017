@@ -13,36 +13,39 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class Robot extends IterativeRobot {
 	public Robot() {
-		initRobotDrive();
+		robotDrive.setExpiration(0.1D);
+
+		//"Who needs safety?"
+		robotDrive.setSafetyEnabled(false);
 	}
 
 	@Override
 	public void autonomousInit() {
 		System.out.println("autonomous started");
 
+		//Test autonomous command
 		new SingleCommandGroup(new CommandDrive(2D, 0.75D, 0D));
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		 updateScheduler();
+	}
+	
+	@Override
+	public void teleopInit() {
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		while(isOperatorControl() && isEnabled()) {
+			updateScheduler();
+			
 			drive();
 			handleShooter();
 
 			Timer.delay(0.005D);
 		}
-	}
-
-	private void initRobotDrive() {
-		robotDrive.setExpiration(0.1D);
-
-		//"Who needs safety?"
-		robotDrive.setSafetyEnabled(false);
 	}
 
 	/**
@@ -75,13 +78,23 @@ public class Robot extends IterativeRobot {
 		robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
 	}
 
+	/**
+	 * Handles input used to shoot fuel cells
+	 */
 	private void handleShooter() {
-		double shootAxis = LGController.getRawAxis(1);
+		double shootAxis = lgController.getRawAxis(1);
 
 		if(shootAxis < 0) {
 			shootAxis = 0;
 		}
 
 		new SingleCommandGroup(new CommandShoot(shootAxis)).start();
+	}
+	
+	/**
+	 * Calls the run() method in Scheduler, I guess it's like an update method?
+	 */
+	private void updateScheduler() {
+		Scheduler.getInstance().run();
 	}
 }
