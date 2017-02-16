@@ -19,8 +19,6 @@ public class CommandDrive extends Command {
 	
 	@Override
 	public void initialize() {
-		System.out.println("Command drive started with duration of " + duration);
-		
 		timer = new Timer();
 		
 		timer.start();
@@ -28,7 +26,6 @@ public class CommandDrive extends Command {
 	
 	@Override
 	public void execute() {
-		System.out.println("DRIVING");
 		RobotMap.robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
 	}
 
@@ -39,8 +36,6 @@ public class CommandDrive extends Command {
 	
 	@Override
 	public void end() {
-		System.out.println("END");
-		
 		timer.stop();
 		RobotMap.robotDrive.arcadeDrive(0D, 0D);
 	}

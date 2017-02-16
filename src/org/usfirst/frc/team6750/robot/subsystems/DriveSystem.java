@@ -1,24 +1,20 @@
 package org.usfirst.frc.team6750.robot.subsystems;
 
+import org.usfirst.frc.team6750.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSystem extends Subsystem {
-	/**
-	 * 4 = front left
-	 * 3 = back left
-	 * 1 = front right
-	 * 2 = back right
-	 */
 	public Spark backLeftMotor, frontLeftMotor, backRightMotor, frontRightMotor;
 	
 	public DriveSystem() {
 		super();
 		
-		backLeftMotor = new Spark(3);
-		frontLeftMotor = new Spark(4);
-		backRightMotor = new Spark(2);
-		frontRightMotor = new Spark(0);
+		backLeftMotor = new Spark(RobotMap.BACK_LEFT_MOTOR);
+		frontLeftMotor = new Spark(RobotMap.FRONT_LEFT_MOTOR);
+		backRightMotor = new Spark(RobotMap.BACK_RIGHT_MOTOR);
+		frontRightMotor = new Spark(RobotMap.FRONT_RIGHT_MOTOR);
 		
 		//Motors were attached backwards
 		backLeftMotor.setInverted(true);
