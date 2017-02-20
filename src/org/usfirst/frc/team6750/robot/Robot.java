@@ -3,6 +3,7 @@ package org.usfirst.frc.team6750.robot;
 import static org.usfirst.frc.team6750.robot.RobotMap.*;
 import static org.usfirst.frc.team6750.robot.Settings.*;
 
+import org.usfirst.frc.team6750.robot.Settings.Position;
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team6750.robot.commands.CommandShoot;
 import org.usfirst.frc.team6750.robot.commands.SingleCommandGroup;
@@ -12,16 +13,21 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Main robot class
+ * 
+ * Don't delete
+ */
 public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		robotDrive.setExpiration(0.1D);
 
 		robotDrive.setSafetyEnabled(true);
-		
+
 		SmartDashboard.putString("Starting Position", Settings.STARTING_POSITION.getName());
 	}
-	
+
 	@Override
 	public void testInit() {
 		updateSettings();
@@ -91,7 +97,7 @@ public class Robot extends IterativeRobot {
 			moveSpeed = (slowMoveAxis * SLOW_MOVE_MODIFIER);
 		}
 
-		moveSpeed *= -1D;
+		moveSpeed *= -1D; //Either the controller axes are backwards or the motors are backwards
 		rotateSpeed *= -1D;
 
 		//Send move and rotate values to the RobotDrive
@@ -117,7 +123,7 @@ public class Robot extends IterativeRobot {
 	private void updateScheduler() {
 		Scheduler.getInstance().run();
 	}
-	
+
 	/**
 	 * Loads data from the dashboard to the Settings
 	 * 

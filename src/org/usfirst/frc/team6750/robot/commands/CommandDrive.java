@@ -4,12 +4,14 @@ import org.usfirst.frc.team6750.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Drives the robot using a given duration, speed, and rotation
+ */
 public class CommandDrive extends Command {
 	public Timer timer;
 	public double duration, moveSpeed, rotateSpeed;
-	
+
 	/**
 	 * Used to drive and steer the robot for a given speed and given duration
 	 * 
@@ -21,39 +23,47 @@ public class CommandDrive extends Command {
 		this.duration = duration;
 		this.moveSpeed = moveSpeed;
 		this.rotateSpeed = rotateSpeed;
-		
+
 		//this.requires(RobotMap.driveSystem);
-		
+
 		System.err.println("MOVE SPEED: " + moveSpeed);
 	}
-	
+
+	/**
+	 * Starts the timer
+	 */
 	@Override
 	public void initialize() {
 		timer = new Timer();
-		
+
 		timer.start();
 	}
-	
+
+	/**
+	 * Called every "periodic," ensures a constant speed
+	 */
 	@Override
 	public void execute() {
 		RobotMap.robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
-		
-		SmartDashboard.putNumber("Move Speed", moveSpeed);
-		SmartDashboard.putNumber("Rotate Speed", rotateSpeed);
 	}
 
+	/**
+	 * Returns true when finished
+	 * 
+	 * Only checks if the timer is past the duration
+	 */
 	@Override
 	protected boolean isFinished() {
 		return timer.get() >= duration ? true : false;
 	}
-	
+
+	/**
+	 * Shuts off all motors and stops the timer
+	 */
 	@Override
 	public void end() {
 		timer.stop();
 		RobotMap.robotDrive.arcadeDrive(0D, 0D);
-		
-		SmartDashboard.putNumber("Move Speed", 0);
-		SmartDashboard.putNumber("Rotate Speed", 0);
 	}
 
 	@Override

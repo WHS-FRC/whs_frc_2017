@@ -4,19 +4,22 @@ import org.usfirst.frc.team6750.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+/**
+ * TODO Figure out if we're going to have a shooter
+ */
 public class CommandShoot extends Command {
 	public double speed;
-	
+
 	public CommandShoot(double speed) {
 		this.speed = speed;
-		
+
 		this.requires(RobotMap.shooterSystem);
 	}
-	
+
 	@Override
 	public void initialize() {
 	}
-	
+
 	@Override
 	public void execute() {
 		RobotMap.shooterSystem.shooterMotor.set(speed);
@@ -26,7 +29,7 @@ public class CommandShoot extends Command {
 	protected boolean isFinished() {
 		return true;
 	}
-	
+
 	@Override
 	public void end() {
 	}

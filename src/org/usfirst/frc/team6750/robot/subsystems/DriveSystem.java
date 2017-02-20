@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+/**
+ * Composed of the 4 motors used to drive the robot
+ */
 public class DriveSystem extends Subsystem {
 	public Spark backLeftMotor, backRightMotor;
 	public Jaguar frontLeftMotor, frontRightMotor;
