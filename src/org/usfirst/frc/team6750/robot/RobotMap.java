@@ -5,9 +5,10 @@ import org.usfirst.frc.team6750.robot.subsystems.ShooterSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class RobotMap {
-	public static final int BACK_LEFT_MOTOR = 3, FRONT_LEFT_MOTOR = 4, BACK_RIGHT_MOTOR = 2, FRONT_RIGHT_MOTOR = 0;
+	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4;
 	public static final int SHOOTER_MOTOR = 5;
 	
 	/**
@@ -33,6 +34,8 @@ public class RobotMap {
 	 * Should always be the first controller plugged in
 	 */
 	public static Joystick xboxController = new Joystick(0);
+	
+	public static JoystickButton xboxB = new JoystickButton(xboxController, 1);
 	
 	/**
 	 * The Logitech controller
