@@ -22,6 +22,8 @@ public class AutonomousCommandGroup extends CommandGroup {
 
 		this.addSequential(new CommandDrive(2D, 0.7D, 0D)); //Drive across the base line
 
+		//Start to load gears
+		
 		if(Settings.STARTING_POSITION == Position.LEFT) {
 			this.addSequential(new CommandDrive(1D, 0D, -0.523D)); //Rotate 90 degrees to the right
 		} else if(Settings.STARTING_POSITION == Position.RIGHT) {

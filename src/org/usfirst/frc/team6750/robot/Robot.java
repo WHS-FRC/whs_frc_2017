@@ -26,6 +26,7 @@ public class Robot extends IterativeRobot {
 		robotDrive.setSafetyEnabled(true);
 
 		SmartDashboard.putString("Starting Position", Settings.STARTING_POSITION.getName());
+		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
 	}
 
 	@Override
@@ -131,5 +132,6 @@ public class Robot extends IterativeRobot {
 	 */
 	private void updateSettings() {
 		Settings.STARTING_POSITION = Position.getPosition(SmartDashboard.getString("Starting Position", Position.MIDDLE.getName()));
+		Settings.GEAR_KNOCKER_MOTOR_SPEED = SmartDashboard.getNumber("Gear Knocker Speed", 0.75D);
 	}
 }

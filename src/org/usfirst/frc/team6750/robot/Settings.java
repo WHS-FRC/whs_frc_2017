@@ -10,6 +10,11 @@ public class Settings {
 	public static final double SLOW_MOVE_MODIFIER = 0.65D;
 
 	/**
+	 * The speed value for the gear knocker winch motor double whammy thing
+	 */
+	public static double GEAR_KNOCKER_MOTOR_SPEED = 0.75D;
+	
+	/**
 	 * Defines what position the robot is starting in
 	 * 
 	 * Can be changed in the dashboard and should always be defined before anything else
