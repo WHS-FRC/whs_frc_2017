@@ -5,7 +5,7 @@ import static org.usfirst.frc.team6750.robot.Settings.*;
 
 import org.usfirst.frc.team6750.robot.Settings.Position;
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
-import org.usfirst.frc.team6750.robot.commands.CommandKnockGears;
+import org.usfirst.frc.team6750.robot.commands.CommandToggleGearKnocker;
 import org.usfirst.frc.team6750.robot.commands.CommandKnockerSpeed;
 import org.usfirst.frc.team6750.robot.commands.SingleCommandGroup;
 
@@ -26,14 +26,24 @@ public class Robot extends IterativeRobot {
 
 		robotDrive.setSafetyEnabled(true);
 		
-		updateSettings();
+		addDashboardSettings();
 		addCommands();
+	}
+	
+	private void addDashboardSettings() {
+		SmartDashboard.putString("Starting Position", Settings.STARTING_POSITION.getName());
+		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
+
+		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
+		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
+		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
+		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
 	}
 
 	private void addCommands() {
-		xboxX.toggleWhenPressed(new SingleCommandGroup(new CommandKnockGears()));
-		xboxY.whenPressed(new SingleCommandGroup(new CommandKnockerSpeed(0.05D)));
-		xboxA.whenPressed(new SingleCommandGroup(new CommandKnockerSpeed(-0.05D)));
+		xboxX.whenPressed(new SingleCommandGroup(new CommandToggleGearKnocker()));
+		xboxY.whenPressed(new SingleCommandGroup(new CommandKnockerSpeed(0.1D)));
+		xboxA.whenPressed(new SingleCommandGroup(new CommandKnockerSpeed(-0.1D)));
 
 	}
 
@@ -70,13 +80,18 @@ public class Robot extends IterativeRobot {
 		while(isOperatorControl() && isEnabled()) {
 			updateSettings();
 			updateScheduler();
-
+			
+			handleKnocker();
 			drive();
 
 			Timer.delay(0.005D);
 		}
 	}
 
+	private void handleKnocker() {
+		RobotMap.gearLoaderSystem.updateSpeed();
+	}
+	
 	/**
 	 * Drives the robot
 	 */
@@ -125,10 +140,5 @@ public class Robot extends IterativeRobot {
 	private void updateSettings() {
 		Settings.STARTING_POSITION = Position.getPosition(SmartDashboard.getString("Starting Position", Position.MIDDLE.getName()));
 		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
-
-		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
-		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
-		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
-		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
 	}
 }

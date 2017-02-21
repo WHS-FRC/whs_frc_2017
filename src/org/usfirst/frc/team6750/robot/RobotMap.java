@@ -44,8 +44,9 @@ public class RobotMap {
 	 */
 	public static Joystick xboxController = new Joystick(0);
 
-	public static JoystickButton xboxA = new JoystickButton(xboxController, 1), xboxB = new JoystickButton(xboxController, 2), xboxX = new JoystickButton(xboxController, 3), xboxY = new JoystickButton(xboxController, 4);
-	
+	public static JoystickButton xboxA = new JoystickButton(xboxController, 1), xboxB = new JoystickButton(xboxController, 2), xboxX = new JoystickButton(xboxController, 3), xboxY = new JoystickButton(xboxController, 4), xboxLT = new JoystickButton(xboxController, 5),
+			xboxRT = new JoystickButton(xboxController, 6);
+
 	/**
 	 * The Logitech controller
 	 * 

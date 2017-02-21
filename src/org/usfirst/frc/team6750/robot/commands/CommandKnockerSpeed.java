@@ -1,5 +1,6 @@
 package org.usfirst.frc.team6750.robot.commands;
 
+import org.usfirst.frc.team6750.robot.RobotMap;
 import org.usfirst.frc.team6750.robot.Settings;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,24 +13,24 @@ public class CommandKnockerSpeed extends Command {
 
 	public CommandKnockerSpeed(double speed) {
 		this.speed = speed;
+
 	}
 
 	@Override
 	public void initialize() {
-	}
-
-	@Override
-	public void execute() {
 		Settings.GEAR_KNOCKER_MOTOR_SPEED += speed;
 
 		if(Settings.GEAR_KNOCKER_MOTOR_SPEED > 1D) {
 			Settings.GEAR_KNOCKER_MOTOR_SPEED = 1D;
-		} else if(Settings.GEAR_KNOCKER_MOTOR_SPEED < 0.2D) {
-			Settings.GEAR_KNOCKER_MOTOR_SPEED = 0.2D;
+		} else if(Settings.GEAR_KNOCKER_MOTOR_SPEED < 0D) {
+			Settings.GEAR_KNOCKER_MOTOR_SPEED = 0D;
 		}
-		
-		System.out.println("Added " + speed);
-		System.out.println("Current Speed: " + Settings.GEAR_KNOCKER_MOTOR_SPEED);
+
+		RobotMap.gearLoaderSystem.updateSpeed();
+	}
+
+	@Override
+	public void execute() {
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public class Settings {
 	/**
 	 * The speed value for the gear knocker winch motor double whammy thing
 	 */
-	public static double GEAR_KNOCKER_MOTOR_SPEED = 0.5D;
+	public static double GEAR_KNOCKER_MOTOR_SPEED = 3.5D;
 	
 	/**
 	 * Defines what position the robot is starting in
@@ -21,6 +21,8 @@ public class Settings {
 	 */
 	public static Position STARTING_POSITION = Position.LEFT;
 
+	public static int accumulatorCenter = 0, accumulatorDb = 0, avgBits = 0, osBits = 0;
+	
 	/**
 	 * Used to determine where the robot starts on the field
 	 */

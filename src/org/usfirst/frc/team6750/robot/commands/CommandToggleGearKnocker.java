@@ -1,7 +1,6 @@
 package org.usfirst.frc.team6750.robot.commands;
 
 import org.usfirst.frc.team6750.robot.RobotMap;
-import org.usfirst.frc.team6750.robot.Settings;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,28 +9,29 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * The speed can be set in the settings via the dash board
  */
-public class CommandKnockGears extends Command {
-	public CommandKnockGears() {
+public class CommandToggleGearKnocker extends Command {
+	public CommandToggleGearKnocker() {
 		this.requires(RobotMap.gearLoaderSystem);
 	}
 
 	@Override
 	public void initialize() {
+		System.out.println("TOGGLING");
+		RobotMap.gearLoaderSystem.toggle();
+		System.out.println("IS ON: " + RobotMap.gearLoaderSystem.isOn());
 	}
 
 	@Override
 	public void execute() {
-		RobotMap.gearLoaderSystem.gearKnocker.set(Settings.GEAR_KNOCKER_MOTOR_SPEED);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public void end() {
-		RobotMap.gearLoaderSystem.gearKnocker.set(0D);
 	}
 
 	@Override
