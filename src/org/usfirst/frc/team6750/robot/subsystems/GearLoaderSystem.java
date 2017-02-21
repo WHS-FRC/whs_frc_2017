@@ -27,9 +27,9 @@ public class GearLoaderSystem extends Subsystem {
 
 	public void updateSpeed() {
 		if(!on) {
-			gearKnocker.set(0D);
+			gearKnocker.setSpeed(0D);
 		} else {
-			gearKnocker.set(Settings.GEAR_KNOCKER_MOTOR_SPEED);
+			gearKnocker.setSpeed(Settings.GEAR_KNOCKER_MOTOR_SPEED);
 			
 			System.out.println("GEAR KNOCKER SPEED :" + Settings.GEAR_KNOCKER_MOTOR_SPEED);
 			System.out.println("SPEED: " + gearKnocker.getSpeed());
