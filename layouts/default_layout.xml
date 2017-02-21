@@ -1,0 +1,42 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="49" y="91"/>
+		<property name="Text" value="Drive Motors"/>
+	</static-widget>
+	<widget field="Front Right Motor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
+		<location x="10" y="208"/>
+		<property name="Maximum" value="1.0"/>
+		<property name="Minimum" value="-1.0"/>
+	</widget>
+	<widget field="Back Right Motor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
+		<location x="9" y="173"/>
+		<property name="Maximum" value="1.0"/>
+		<property name="Minimum" value="-1.0"/>
+	</widget>
+	<widget field="Front Left Motor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
+		<location x="9" y="141"/>
+		<property name="Maximum" value="1.0"/>
+		<property name="Minimum" value="-1.0"/>
+	</widget>
+	<widget field="Back Left Motor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
+		<location x="8" y="108"/>
+		<property name="Maximum" value="1.0"/>
+		<property name="Minimum" value="-1.0"/>
+	</widget>
+	<widget field="Starting Position" type="String" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="10" y="41"/>
+	</widget>
+	<widget field="Gear Knocker Speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.ProgressBar">
+		<location x="9" y="10"/>
+		<property name="Maximum" value="1.0"/>
+		<property name="Minimum" value="0.2"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="49" y="91"/>
+		<property name="Text" value="Drive Motors"/>
+	</static-widget>
+</dashboard>
+<live-window>
+</live-window>
+</xml>

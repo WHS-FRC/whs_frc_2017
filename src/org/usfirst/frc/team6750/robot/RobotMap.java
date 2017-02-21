@@ -2,10 +2,10 @@ package org.usfirst.frc.team6750.robot;
 
 import org.usfirst.frc.team6750.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team6750.robot.subsystems.GearLoaderSystem;
-import org.usfirst.frc.team6750.robot.subsystems.ShooterSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * Maps out the entire robot
@@ -18,7 +18,7 @@ public class RobotMap {
 	 * 
 	 * Also makes it easy to change the motors
 	 */
-	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4, GEAR_KNOCKER_MOTOR = 5, SHOOTER_MOTOR = 6;
+	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4, GEAR_KNOCKER_MOTOR = 5;
 
 	/**
 	 * Contains the motors used to drive
@@ -29,11 +29,6 @@ public class RobotMap {
 	 * Contains the winch motor used to knock gears into the loading slot
 	 */
 	public static GearLoaderSystem gearLoaderSystem = new GearLoaderSystem();
-
-	/**
-	 * Contains the motor used to shoot fuel cells
-	 */
-	public static ShooterSystem shooterSystem = new ShooterSystem();
 
 	/**
 	 * Used to drive the robot
@@ -49,6 +44,8 @@ public class RobotMap {
 	 */
 	public static Joystick xboxController = new Joystick(0);
 
+	public static JoystickButton xboxA = new JoystickButton(xboxController, 1), xboxB = new JoystickButton(xboxController, 2), xboxX = new JoystickButton(xboxController, 3), xboxY = new JoystickButton(xboxController, 4);
+	
 	/**
 	 * The Logitech controller
 	 * 

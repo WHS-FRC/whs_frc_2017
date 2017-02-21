@@ -12,7 +12,7 @@ public class Settings {
 	/**
 	 * The speed value for the gear knocker winch motor double whammy thing
 	 */
-	public static double GEAR_KNOCKER_MOTOR_SPEED = 0.75D;
+	public static double GEAR_KNOCKER_MOTOR_SPEED = 0.5D;
 	
 	/**
 	 * Defines what position the robot is starting in

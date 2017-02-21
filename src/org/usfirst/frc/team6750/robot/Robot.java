@@ -5,7 +5,8 @@ import static org.usfirst.frc.team6750.robot.Settings.*;
 
 import org.usfirst.frc.team6750.robot.Settings.Position;
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
-import org.usfirst.frc.team6750.robot.commands.CommandShoot;
+import org.usfirst.frc.team6750.robot.commands.CommandKnockGears;
+import org.usfirst.frc.team6750.robot.commands.CommandKnockerSpeed;
 import org.usfirst.frc.team6750.robot.commands.SingleCommandGroup;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -24,19 +25,24 @@ public class Robot extends IterativeRobot {
 		robotDrive.setExpiration(0.1D);
 
 		robotDrive.setSafetyEnabled(true);
+		
+		updateSettings();
+		addCommands();
+	}
 
-		SmartDashboard.putString("Starting Position", Settings.STARTING_POSITION.getName());
-		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
+	private void addCommands() {
+		xboxX.toggleWhenPressed(new SingleCommandGroup(new CommandKnockGears()));
+		xboxY.whenPressed(new SingleCommandGroup(new CommandKnockerSpeed(0.05D)));
+		xboxA.whenPressed(new SingleCommandGroup(new CommandKnockerSpeed(-0.05D)));
+
 	}
 
 	@Override
 	public void testInit() {
-		updateSettings();
 	}
 
 	@Override
 	public void testPeriodic() {
-		updateSettings();
 		updateScheduler();
 	}
 
@@ -66,7 +72,6 @@ public class Robot extends IterativeRobot {
 			updateScheduler();
 
 			drive();
-			handleShooter();
 
 			Timer.delay(0.005D);
 		}
@@ -106,19 +111,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * Handles input used to shoot fuel cells
-	 */
-	private void handleShooter() {
-		double shootAxis = lgController.getRawAxis(1);
-
-		if(shootAxis < 0) {
-			shootAxis = 0;
-		}
-
-		new SingleCommandGroup(new CommandShoot(shootAxis)).start();
-	}
-
-	/**
 	 * Calls the run() method in Scheduler, I guess it's like an update method?
 	 */
 	private void updateScheduler() {
@@ -132,6 +124,11 @@ public class Robot extends IterativeRobot {
 	 */
 	private void updateSettings() {
 		Settings.STARTING_POSITION = Position.getPosition(SmartDashboard.getString("Starting Position", Position.MIDDLE.getName()));
-		Settings.GEAR_KNOCKER_MOTOR_SPEED = SmartDashboard.getNumber("Gear Knocker Speed", 0.75D);
+		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
+
+		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
+		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
+		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
+		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
 	}
 }
