@@ -90,14 +90,14 @@ public class Robot extends IterativeRobot {
 
 	private void handleDumper() {
 		double dumpAxis = lgController.getRawAxis(1);
+		dumpAxis *= (-0.25D);
 
-		dumpAxis *= (-1D);
-		dumpAxis *= 0.25D;
-
-		dumperSystem.dumperMotor.setSpeed(dumpAxis);
+		if(dumpAxis > 0.1D) {
+			dumperSystem.dumperMotor.setSpeed(dumpAxis);
+		}
 	}
 
-	private void handleKnocker() {
+	private void handleKnocker() { //ahead -0.59, on -0.577, behind -0.55
 		RobotMap.gearLoaderSystem.updateSpeed();
 	}
 

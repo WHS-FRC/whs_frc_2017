@@ -16,9 +16,7 @@ public class CommandToggleGearKnocker extends Command {
 
 	@Override
 	public void initialize() {
-		System.out.println("TOGGLING");
 		RobotMap.gearLoaderSystem.toggle();
-		System.out.println("IS ON: " + RobotMap.gearLoaderSystem.isOn());
 	}
 
 	@Override
