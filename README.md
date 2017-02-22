@@ -8,3 +8,13 @@ To setup project in Eclipse, follow these steps:
 5) The project should appear in the Projects box
 6) Check the box next to it and select Finish
 
+
+Controls:
+XBox Controller:
+	Left Joystick - Fast Movement
+	Right Joystick - Slow Movement
+	
+LG Controller:
+	Joystick Forward/Backward - Dumper Forward/Backward
+	Button 7 - Toggle Winch Motor
+	Slider - Winch Motor Speed (Negative is 0%, Positive is 100%)

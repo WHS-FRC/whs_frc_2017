@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6750.robot;
 
 import org.usfirst.frc.team6750.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team6750.robot.subsystems.DumperSystem;
 import org.usfirst.frc.team6750.robot.subsystems.GearLoaderSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,7 +19,7 @@ public class RobotMap {
 	 * 
 	 * Also makes it easy to change the motors
 	 */
-	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4, GEAR_KNOCKER_MOTOR = 5;
+	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4, GEAR_KNOCKER_MOTOR = 5, DUMPER_MOTOR = 6;
 
 	/**
 	 * Contains the motors used to drive
@@ -29,6 +30,8 @@ public class RobotMap {
 	 * Contains the winch motor used to knock gears into the loading slot
 	 */
 	public static GearLoaderSystem gearLoaderSystem = new GearLoaderSystem();
+
+	public static DumperSystem dumperSystem = new DumperSystem();
 
 	/**
 	 * Used to drive the robot
@@ -53,4 +56,6 @@ public class RobotMap {
 	 * Should always by the second controller plugged in
 	 */
 	public static Joystick lgController = new Joystick(1);
+	
+	public static JoystickButton lg7 = new JoystickButton(lgController, 7);
 }

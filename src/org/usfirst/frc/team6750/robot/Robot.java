@@ -6,7 +6,6 @@ import static org.usfirst.frc.team6750.robot.Settings.*;
 import org.usfirst.frc.team6750.robot.Settings.Position;
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team6750.robot.commands.CommandToggleGearKnocker;
-import org.usfirst.frc.team6750.robot.commands.CommandKnockerSpeed;
 import org.usfirst.frc.team6750.robot.commands.SingleCommandGroup;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -25,11 +24,11 @@ public class Robot extends IterativeRobot {
 		robotDrive.setExpiration(0.1D);
 
 		robotDrive.setSafetyEnabled(true);
-		
+
 		addDashboardSettings();
 		addCommands();
 	}
-	
+
 	private void addDashboardSettings() {
 		SmartDashboard.putString("Starting Position", Settings.STARTING_POSITION.getName());
 		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
@@ -38,12 +37,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
 		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
+		SmartDashboard.putNumber("Winch Motor", RobotMap.gearLoaderSystem.gearKnocker.getSpeed());
+		SmartDashboard.putNumber("Dumper Motor", RobotMap.dumperSystem.dumperMotor.getSpeed());
 	}
 
 	private void addCommands() {
-		xboxX.whenPressed(new SingleCommandGroup(new CommandToggleGearKnocker()));
-		xboxY.whenPressed(new SingleCommandGroup(new CommandKnockerSpeed(0.1D)));
-		xboxA.whenPressed(new SingleCommandGroup(new CommandKnockerSpeed(-0.1D)));
+		lg7.whenPressed(new SingleCommandGroup(new CommandToggleGearKnocker()));
 
 	}
 
@@ -80,7 +79,8 @@ public class Robot extends IterativeRobot {
 		while(isOperatorControl() && isEnabled()) {
 			updateSettings();
 			updateScheduler();
-			
+
+			handleDumper();
 			handleKnocker();
 			drive();
 
@@ -88,10 +88,19 @@ public class Robot extends IterativeRobot {
 		}
 	}
 
+	private void handleDumper() {
+		double dumpAxis = lgController.getRawAxis(1);
+
+		dumpAxis *= (-1D);
+		dumpAxis *= 0.25D;
+
+		dumperSystem.dumperMotor.setSpeed(dumpAxis);
+	}
+
 	private void handleKnocker() {
 		RobotMap.gearLoaderSystem.updateSpeed();
 	}
-	
+
 	/**
 	 * Drives the robot
 	 */
@@ -139,6 +148,14 @@ public class Robot extends IterativeRobot {
 	 */
 	private void updateSettings() {
 		Settings.STARTING_POSITION = Position.getPosition(SmartDashboard.getString("Starting Position", Position.MIDDLE.getName()));
+
 		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
+
+		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
+		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
+		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
+		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
+		SmartDashboard.putNumber("Winch Motor", RobotMap.gearLoaderSystem.gearKnocker.getSpeed());
+		SmartDashboard.putNumber("Dumper Motor", RobotMap.dumperSystem.dumperMotor.getSpeed());
 	}
 }
