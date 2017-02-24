@@ -30,8 +30,11 @@ public class GearLoaderSystem extends Subsystem {
 			gearKnocker.setSpeed(0D);
 		} else {
 			double slider = RobotMap.lgController.getRawAxis(3);
+			slider *= (-1D);
 			slider += 1D;
-			slider *= (-0.5D);
+			slider *= (0.5D);
+			
+			slider *= (-1D);
 			
 			Settings.GEAR_KNOCKER_MOTOR_SPEED = slider;
 			

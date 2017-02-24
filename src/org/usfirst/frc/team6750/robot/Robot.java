@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	private void addDashboardSettings() {
-		SmartDashboard.putString("Starting Position", Settings.STARTING_POSITION.getName());
+		//SmartDashboard.putString("Starting Position", Settings.STARTING_POSITION.getName());
 		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
 
 		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
@@ -57,7 +57,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		System.out.println("autonomous started");
+		System.out.println("Autonomous Started`");
 
 		updateSettings();
 		new AutonomousCommandGroup().start();
@@ -92,9 +92,7 @@ public class Robot extends IterativeRobot {
 		double dumpAxis = lgController.getRawAxis(1);
 		dumpAxis *= (-0.25D);
 
-		if(dumpAxis > 0.1D) {
-			dumperSystem.dumperMotor.setSpeed(dumpAxis);
-		}
+		dumperSystem.dumperMotor.setSpeed(dumpAxis);
 	}
 
 	private void handleKnocker() { //ahead -0.59, on -0.577, behind -0.55
@@ -121,8 +119,8 @@ public class Robot extends IterativeRobot {
 			rotateSpeed = (slowRotateAxis * SLOW_MOVE_MODIFIER);
 		}
 
-		if(Math.abs(fastMoveAxis) > Math.abs(slowMoveAxis * SLOW_MOVE_MODIFIER)) {
-			moveSpeed = fastMoveAxis;
+		if((Math.abs(fastMoveAxis * SLOW_MOVE_MODIFIER)) > Math.abs(slowMoveAxis * SLOW_MOVE_MODIFIER)) {
+			moveSpeed = fastMoveAxis * SLOW_MOVE_MODIFIER;
 		} else {
 			moveSpeed = (slowMoveAxis * SLOW_MOVE_MODIFIER);
 		}
@@ -147,7 +145,7 @@ public class Robot extends IterativeRobot {
 	 * Should be called in every init and periodic to ensure up-to-date information
 	 */
 	private void updateSettings() {
-		Settings.STARTING_POSITION = Position.getPosition(SmartDashboard.getString("Starting Position", Position.MIDDLE.getName()));
+		//Settings.STARTING_POSITION = Position.getPosition(SmartDashboard.getString("Starting Position", Position.MIDDLE.getName()));
 
 		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
 

@@ -19,7 +19,7 @@ public class Settings {
 	 * 
 	 * Can be changed in the dashboard and should always be defined before anything else
 	 */
-	public static Position STARTING_POSITION = Position.LEFT;
+	public static Position STARTING_POSITION = Position.MIDDLE;
 
 	public static int accumulatorCenter = 0, accumulatorDb = 0, avgBits = 0, osBits = 0;
 	

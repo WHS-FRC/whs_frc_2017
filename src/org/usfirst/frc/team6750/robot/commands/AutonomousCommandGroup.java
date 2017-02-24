@@ -15,19 +15,20 @@ public class AutonomousCommandGroup extends CommandGroup {
 		super("Autonomous Commands");
 
 		if(Settings.STARTING_POSITION == Position.MIDDLE) {
-			this.addSequential(new CommandDrive(1D, 0D, 0.523D)); //Rotate 90 degrees to the left
-			this.addSequential(new CommandDrive(2D, 0.7D, 0D)); //Drive for 2 seconds (until in same position if started left)
-			this.addSequential(new CommandDrive(1D, 0D, -0.523D)); //Rotate 90 degrees to the right
+			System.out.println("WHAT");
+			//this.addSequential(new CommandDrive(1.1D, 0D, 0.5D)); //Rotate 90 degrees to the left
+			//this.addSequential(new CommandDrive(2D, 0.6D, 0D)); //Drive for 2 seconds (until in same position if started left)
+			//this.addSequential(new CommandDrive(1D, 0D, -0.523D)); //Rotate 90 degrees to the right
 		}
 
-		this.addSequential(new CommandDrive(2D, 0.7D, 0D)); //Drive across the base line
+		this.addSequential(new CommandDrive(2D, 0.5D, 0D)); //Drive across the base line
 
 		//Start to load gears
 		
 		if(Settings.STARTING_POSITION == Position.LEFT) {
-			this.addSequential(new CommandDrive(1D, 0D, -0.523D)); //Rotate 90 degrees to the right
+			//this.addSequential(new CommandDrive(1D, 0D, -0.523D)); //Rotate 90 degrees to the right
 		} else if(Settings.STARTING_POSITION == Position.RIGHT) {
-			this.addSequential(new CommandDrive(1D, 0D, -0.523D)); //Rotate 90 degrees to the right
+			//this.addSequential(new CommandDrive(1D, 0D, -0.523D)); //Rotate 90 degrees to the right
 		}
 	}
 }
