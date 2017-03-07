@@ -33,23 +33,23 @@ public class GearLoaderSystem extends Subsystem {
 			slider *= (-1D);
 			slider += 1D;
 			slider *= (0.5D);
-			
+
 			slider *= (-1D);
-			
+
 			Settings.GEAR_KNOCKER_MOTOR_SPEED = slider;
-			
+
 			gearKnocker.setSpeed(Settings.GEAR_KNOCKER_MOTOR_SPEED);
 		}
 	}
-	
+
 	public boolean isOn() {
 		return on;
 	}
-	
+
 	public void set(boolean on) {
 		this.on = on;
 	}
-	
+
 	public void toggle() {
 		on = on ? false : true;
 	}

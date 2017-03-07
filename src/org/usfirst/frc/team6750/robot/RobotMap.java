@@ -56,6 +56,6 @@ public class RobotMap {
 	 * Should always by the second controller plugged in
 	 */
 	public static Joystick lgController = new Joystick(1);
-	
+
 	public static JoystickButton lg7 = new JoystickButton(lgController, 7);
 }
