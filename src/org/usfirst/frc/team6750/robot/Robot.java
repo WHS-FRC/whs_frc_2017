@@ -1,10 +1,16 @@
 package org.usfirst.frc.team6750.robot;
 
-import static org.usfirst.frc.team6750.robot.RobotMap.*;
-import static org.usfirst.frc.team6750.robot.Settings.*;
+import static org.usfirst.frc.team6750.robot.RobotMap.dumperSystem;
+import static org.usfirst.frc.team6750.robot.RobotMap.lg7;
+import static org.usfirst.frc.team6750.robot.RobotMap.lg8;
+import static org.usfirst.frc.team6750.robot.RobotMap.lgController;
+import static org.usfirst.frc.team6750.robot.RobotMap.robotDrive;
+import static org.usfirst.frc.team6750.robot.RobotMap.xboxController;
+import static org.usfirst.frc.team6750.robot.Settings.SLOW_MOVE_MODIFIER;
 
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team6750.robot.commands.CommandToggleGearKnocker;
+import org.usfirst.frc.team6750.robot.commands.CommandToggleWinchReverse;
 import org.usfirst.frc.team6750.robot.commands.SingleCommandGroup;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -47,6 +53,7 @@ public class Robot extends IterativeRobot {
 
 	private void addCommands() {
 		lg7.whenPressed(new SingleCommandGroup(new CommandToggleGearKnocker()));
+		lg8.whenPressed(new SingleCommandGroup(new CommandToggleWinchReverse()));
 
 	}
 

@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * Composed of the 4 motors used to drive the robot
  */
 public class GearLoaderSystem extends Subsystem {
-	private boolean on = false;
-	public Spark gearKnocker; //AKA the winch motor AKA the double whammy
+	private boolean on = false, reverseMotor = false;
+	public Spark gearKnocker; // AKA the winch motor AKA the double whammy
 
 	public GearLoaderSystem() {
 		super();
@@ -26,7 +26,7 @@ public class GearLoaderSystem extends Subsystem {
 	}
 
 	public void updateSpeed() {
-		if(!on) {
+		if (!on) {
 			gearKnocker.setSpeed(0D);
 		} else {
 			double slider = RobotMap.lgController.getRawAxis(3);
@@ -34,7 +34,9 @@ public class GearLoaderSystem extends Subsystem {
 			slider += 1D;
 			slider *= (0.5D);
 
-			slider *= (-1D);
+			if (reverseMotor) {
+				slider *= (-1D);
+			}
 
 			Settings.GEAR_KNOCKER_MOTOR_SPEED = slider;
 
@@ -52,5 +54,9 @@ public class GearLoaderSystem extends Subsystem {
 
 	public void toggle() {
 		on = on ? false : true;
+	}
+
+	public void toggleMotorReverse() {
+		reverseMotor = reverseMotor ? false : true;
 	}
 }

@@ -17,4 +17,5 @@ XBox Controller:
 LG Controller:
 	Joystick Forward/Backward - Dumper Forward/Backward
 	Button 7 - Toggle Winch Motor
+	Button 8 - Toggle Winch Motor Reverse
 	Slider - Winch Motor Speed (Negative is 0%, Positive is 100%)

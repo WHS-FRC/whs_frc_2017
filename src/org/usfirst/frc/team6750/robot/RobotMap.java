@@ -58,4 +58,5 @@ public class RobotMap {
 	public static Joystick lgController = new Joystick(1);
 
 	public static JoystickButton lg7 = new JoystickButton(lgController, 7);
+	public static JoystickButton lg8 = new JoystickButton(lgController, 8);
 }
