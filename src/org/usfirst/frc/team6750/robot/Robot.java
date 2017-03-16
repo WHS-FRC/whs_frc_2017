@@ -8,6 +8,7 @@ import static org.usfirst.frc.team6750.robot.RobotMap.robotDrive;
 import static org.usfirst.frc.team6750.robot.RobotMap.xboxController;
 import static org.usfirst.frc.team6750.robot.Settings.SLOW_MOVE_MODIFIER;
 
+import org.usfirst.frc.team6750.robot.Settings.Position;
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team6750.robot.commands.CommandToggleGearKnocker;
 import org.usfirst.frc.team6750.robot.commands.CommandToggleWinchReverse;
@@ -35,9 +36,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	private void addDashboardSettings() {
-		//SmartDashboard.putString("Starting Position", Settings.STARTING_POSITION.getName());
-		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
-
+		SmartDashboard.putNumber("Starting Position", 0D);
 		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
@@ -49,6 +48,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Forward Speed Limit", Settings.FORWARD_LIMIT);
 		SmartDashboard.putNumber("Backward Speed Limit", Settings.BACKWARD_LIMIT);
 		SmartDashboard.putNumber("Rotate Speed Limit", Settings.ROTATE_LIMIT);
+		
+		for(int i = 0; i < AutonomousCommandGroup.durations.length; i++) {
+			SmartDashboard.putNumber("Duration #" + i, 0D);
+			SmartDashboard.putNumber("Speed #" + i, 0D);
+			SmartDashboard.putNumber("Rotation #" + i, 0D);
+		}
 	}
 
 	private void addCommands() {
@@ -166,9 +171,8 @@ public class Robot extends IterativeRobot {
 	 * Should be called in every init and periodic to ensure up-to-date information
 	 */
 	private void updateSettings() {
-		//Settings.STARTING_POSITION = Position.getPosition(SmartDashboard.getString("Starting Position", Position.MIDDLE.getName()));
-
-		SmartDashboard.putNumber("Gear Knocker Speed", Settings.GEAR_KNOCKER_MOTOR_SPEED);
+		int numericPos = (int) SmartDashboard.getNumber("Starting Position", 0D);
+		Settings.STARTING_POSITION = numericPos == 0 ? Position.MIDDLE : (numericPos == -1 ? Position.LEFT : Position.RIGHT);
 
 		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
@@ -180,5 +184,11 @@ public class Robot extends IterativeRobot {
 		Settings.FORWARD_LIMIT = SmartDashboard.getNumber("Forward Speed Limit", 0.5D);
 		Settings.BACKWARD_LIMIT = SmartDashboard.getNumber("Backward Speed Limit", 0.5D);
 		Settings.ROTATE_LIMIT = SmartDashboard.getNumber("Rotate Speed Limit", 0.5D);
+
+		for(int i = 0; i < AutonomousCommandGroup.durations.length; i++) {
+			AutonomousCommandGroup.durations[i] = SmartDashboard.getNumber("Duration #" + i, 0D);
+			AutonomousCommandGroup.speeds[i] = SmartDashboard.getNumber("Speed #" + i, 0D);
+			AutonomousCommandGroup.rotations[i] = SmartDashboard.getNumber("Rotation #" + i, 0D);
+		}
 	}
 }

@@ -19,7 +19,7 @@ public class Settings {
 	 * 
 	 * Can be changed in the dashboard and should always be defined before anything else
 	 */
-	public static Position STARTING_POSITION = Position.MIDDLE;
+	public static Position STARTING_POSITION = Position.RIGHT;
 
 	public static double FORWARD_LIMIT = 0.5D, BACKWARD_LIMIT = 0.5D, ROTATE_LIMIT = 0.5D;
 	
