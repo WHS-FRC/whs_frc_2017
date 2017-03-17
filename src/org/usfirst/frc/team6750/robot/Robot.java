@@ -50,9 +50,9 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Rotate Speed Limit", Settings.ROTATE_LIMIT);
 		
 		for(int i = 0; i < AutonomousCommandGroup.durations.length; i++) {
-			SmartDashboard.putNumber("Duration #" + i, 0D);
-			SmartDashboard.putNumber("Speed #" + i, 0D);
-			SmartDashboard.putNumber("Rotation #" + i, 0D);
+			//SmartDashboard.putNumber("Duration #" + i, 0D);
+			//SmartDashboard.putNumber("Speed #" + i, 0D);
+			//SmartDashboard.putNumber("Rotation #" + i, 0D);
 		}
 	}
 
@@ -186,9 +186,9 @@ public class Robot extends IterativeRobot {
 		Settings.ROTATE_LIMIT = SmartDashboard.getNumber("Rotate Speed Limit", 0.5D);
 
 		for(int i = 0; i < AutonomousCommandGroup.durations.length; i++) {
-			AutonomousCommandGroup.durations[i] = SmartDashboard.getNumber("Duration #" + i, 0D);
-			AutonomousCommandGroup.speeds[i] = SmartDashboard.getNumber("Speed #" + i, 0D);
-			AutonomousCommandGroup.rotations[i] = SmartDashboard.getNumber("Rotation #" + i, 0D);
+			//AutonomousCommandGroup.durations[i] = SmartDashboard.getNumber("Duration #" + i, 0D);
+			//AutonomousCommandGroup.speeds[i] = SmartDashboard.getNumber("Speed #" + i, 0D);
+			//AutonomousCommandGroup.rotations[i] = SmartDashboard.getNumber("Rotation #" + i, 0D);
 		}
 	}
 }

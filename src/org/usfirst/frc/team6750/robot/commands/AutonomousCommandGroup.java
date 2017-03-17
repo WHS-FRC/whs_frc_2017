@@ -14,11 +14,13 @@ public class AutonomousCommandGroup extends CommandGroup {
 
 	public AutonomousCommandGroup() {
 		super("Autonomous Commands"); // 15 SECONDS!!
+		
+		addSequential(new CommandDrive(5D, 0.6D, 0D)); //TEMP
 
 		switch (Settings.STARTING_POSITION) {
 		case MIDDLE: {
 			for (int i = 0; i < durations.length; i++) {
-				addSequential(new CommandDrive(durations[i], speeds[i], rotations[i]));
+				//addSequential(new CommandDrive(durations[i], speeds[i], rotations[i]));
 			}
 			/*
 			 * 1) Go forward to middle gear axle 2) Go backward to deposit gear
@@ -29,7 +31,7 @@ public class AutonomousCommandGroup extends CommandGroup {
 		}
 		case LEFT:
 			for (int i = 0; i < durations.length; i++) {
-				addSequential(new CommandDrive(durations[i], speeds[i], rotations[i]));
+				//addSequential(new CommandDrive(durations[i], speeds[i], rotations[i]));
 			}
 			/*
 			 * 1) Go forward 2) Turn ~60 degrees to the right (face gear axle)
@@ -38,7 +40,7 @@ public class AutonomousCommandGroup extends CommandGroup {
 			break;
 		case RIGHT:
 			for (int i = 0; i < durations.length; i++) {
-				addSequential(new CommandDrive(durations[i], speeds[i], rotations[i]));
+				//addSequential(new CommandDrive(durations[i], speeds[i], rotations[i]));
 			}
 			/*
 			 * 1) Go forward (align with right gear axle) 2) Turn ~60 degrees to
