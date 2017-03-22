@@ -8,7 +8,6 @@ import static org.usfirst.frc.team6750.robot.RobotMap.robotDrive;
 import static org.usfirst.frc.team6750.robot.RobotMap.xboxController;
 import static org.usfirst.frc.team6750.robot.Settings.SLOW_MOVE_MODIFIER;
 
-import org.usfirst.frc.team6750.robot.Settings.Position;
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team6750.robot.commands.CommandToggleGearKnocker;
 import org.usfirst.frc.team6750.robot.commands.CommandToggleWinchReverse;
@@ -44,12 +43,6 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putNumber("Winch Motor", RobotMap.gearLoaderSystem.gearKnocker.getSpeed());
 		SmartDashboard.putNumber("Dumper Motor", RobotMap.dumperSystem.dumperMotor.getSpeed());
-
-		for (int i = 0; i < AutonomousCommandGroup.durations.length; i++) {
-			// SmartDashboard.putNumber("Duration #" + i, 0D);
-			// SmartDashboard.putNumber("Speed #" + i, 0D);
-			// SmartDashboard.putNumber("Rotation #" + i, 0D);
-		}
 	}
 
 	private void addCommands() {
@@ -160,24 +153,11 @@ public class Robot extends IterativeRobot {
 	 * information
 	 */
 	private void updateSettings() {
-		int numericPos = (int) SmartDashboard.getNumber("Starting Position", 0D);
-		Settings.STARTING_POSITION = numericPos == 0 ? Position.MIDDLE
-				: (numericPos == -1 ? Position.LEFT : Position.RIGHT);
-
 		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
 		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
 		SmartDashboard.putNumber("Winch Motor", RobotMap.gearLoaderSystem.gearKnocker.getSpeed());
 		SmartDashboard.putNumber("Dumper Motor", RobotMap.dumperSystem.dumperMotor.getSpeed());
-
-		for (int i = 0; i < AutonomousCommandGroup.durations.length; i++) {
-			// AutonomousCommandGroup.durations[i] =
-			// SmartDashboard.getNumber("Duration #" + i, 0D);
-			// AutonomousCommandGroup.speeds[i] =
-			// SmartDashboard.getNumber("Speed #" + i, 0D);
-			// AutonomousCommandGroup.rotations[i] =
-			// SmartDashboard.getNumber("Rotation #" + i, 0D);
-		}
 	}
 }
