@@ -1,16 +1,14 @@
 package org.usfirst.frc.team6750.robot;
 
-import static org.usfirst.frc.team6750.robot.RobotMap.dumperSystem;
 import static org.usfirst.frc.team6750.robot.RobotMap.lg7;
 import static org.usfirst.frc.team6750.robot.RobotMap.lg8;
-import static org.usfirst.frc.team6750.robot.RobotMap.lgController;
 import static org.usfirst.frc.team6750.robot.RobotMap.robotDrive;
 import static org.usfirst.frc.team6750.robot.RobotMap.xboxController;
 import static org.usfirst.frc.team6750.robot.Settings.SLOW_MOVE_MODIFIER;
 
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
-import org.usfirst.frc.team6750.robot.commands.CommandToggleGearKnocker;
-import org.usfirst.frc.team6750.robot.commands.CommandToggleWinchReverse;
+import org.usfirst.frc.team6750.robot.commands.CommandToggleWinch;
+import org.usfirst.frc.team6750.robot.commands.CommandWinchReverse;
 import org.usfirst.frc.team6750.robot.commands.SingleCommandGroup;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -41,13 +39,13 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
 		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
 
-		SmartDashboard.putNumber("Winch Motor", RobotMap.gearLoaderSystem.gearKnocker.getSpeed());
-		SmartDashboard.putNumber("Dumper Motor", RobotMap.dumperSystem.dumperMotor.getSpeed());
+		SmartDashboard.putNumber("Left Winch Motor", RobotMap.winchSystem.leftMotor.getSpeed());
+		SmartDashboard.putNumber("Right Winch Motor", RobotMap.winchSystem.rightMotor.getSpeed());
 	}
 
 	private void addCommands() {
-		lg7.whenPressed(new SingleCommandGroup(new CommandToggleGearKnocker()));
-		lg8.whenPressed(new SingleCommandGroup(new CommandToggleWinchReverse()));
+		lg7.whenPressed(new SingleCommandGroup(new CommandToggleWinch()));
+		lg8.whenPressed(new SingleCommandGroup(new CommandWinchReverse()));
 
 	}
 
@@ -85,23 +83,15 @@ public class Robot extends IterativeRobot {
 			updateSettings();
 			updateScheduler();
 
-			handleDumper();
-			handleKnocker();
+			handleWinch();
 			drive();
 
 			Timer.delay(0.005D);
 		}
 	}
 
-	private void handleDumper() {
-		double dumpAxis = lgController.getRawAxis(1);
-		dumpAxis *= (-0.25D);
-
-		dumperSystem.dumperMotor.setSpeed(dumpAxis);
-	}
-
-	private void handleKnocker() { // ahead -0.59, on -0.577, behind -0.55
-		RobotMap.gearLoaderSystem.updateSpeed();
+	private void handleWinch() {
+		RobotMap.winchSystem.updateSpeed();
 	}
 
 	/**
@@ -157,7 +147,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
 		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
-		SmartDashboard.putNumber("Winch Motor", RobotMap.gearLoaderSystem.gearKnocker.getSpeed());
-		SmartDashboard.putNumber("Dumper Motor", RobotMap.dumperSystem.dumperMotor.getSpeed());
+
+		SmartDashboard.putNumber("Left Winch Motor", RobotMap.winchSystem.leftMotor.getSpeed());
+		SmartDashboard.putNumber("Right Winch Motor", RobotMap.winchSystem.rightMotor.getSpeed());
 	}
 }

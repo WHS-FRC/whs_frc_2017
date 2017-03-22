@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * The speed can be set in the settings via the dash board
  */
-public class CommandToggleWinchReverse extends Command {
-	public CommandToggleWinchReverse() {
-		this.requires(RobotMap.gearLoaderSystem);
+public class CommandWinchReverse extends Command {
+	public CommandWinchReverse() {
+		this.requires(RobotMap.winchSystem);
 	}
 
 	@Override
 	public void initialize() {
-		RobotMap.gearLoaderSystem.toggleMotorReverse();
+		RobotMap.winchSystem.reverse();
 	}
 
 	@Override

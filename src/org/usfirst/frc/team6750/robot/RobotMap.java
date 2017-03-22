@@ -1,8 +1,7 @@
 package org.usfirst.frc.team6750.robot;
 
 import org.usfirst.frc.team6750.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team6750.robot.subsystems.DumperSystem;
-import org.usfirst.frc.team6750.robot.subsystems.GearLoaderSystem;
+import org.usfirst.frc.team6750.robot.subsystems.WinchSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -19,7 +18,8 @@ public class RobotMap {
 	 * 
 	 * Also makes it easy to change the motors
 	 */
-	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4, GEAR_KNOCKER_MOTOR = 5, DUMPER_MOTOR = 6;
+	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4,
+			WINCH_LEFT_MOTOR = 5, WINCH_RIGHT_MOTOR = 6;
 
 	/**
 	 * Contains the motors used to drive
@@ -29,16 +29,16 @@ public class RobotMap {
 	/**
 	 * Contains the winch motor used to knock gears into the loading slot
 	 */
-	public static GearLoaderSystem gearLoaderSystem = new GearLoaderSystem();
-
-	public static DumperSystem dumperSystem = new DumperSystem();
+	public static WinchSystem winchSystem = new WinchSystem();
 
 	/**
 	 * Used to drive the robot
 	 * 
-	 * The order in which the parameters are entered is intended to be that way (see doc for RobotDrive)
+	 * The order in which the parameters are entered is intended to be that way
+	 * (see doc for RobotDrive)
 	 */
-	public static RobotDrive robotDrive = new RobotDrive(driveSystem.backLeftMotor, driveSystem.frontLeftMotor, driveSystem.backRightMotor, driveSystem.frontRightMotor);
+	public static RobotDrive robotDrive = new RobotDrive(driveSystem.backLeftMotor, driveSystem.frontLeftMotor,
+			driveSystem.backRightMotor, driveSystem.frontRightMotor);
 
 	/**
 	 * The Xbox controller
@@ -47,7 +47,9 @@ public class RobotMap {
 	 */
 	public static Joystick xboxController = new Joystick(0);
 
-	public static JoystickButton xboxA = new JoystickButton(xboxController, 1), xboxB = new JoystickButton(xboxController, 2), xboxX = new JoystickButton(xboxController, 3), xboxY = new JoystickButton(xboxController, 4), xboxLT = new JoystickButton(xboxController, 5),
+	public static JoystickButton xboxA = new JoystickButton(xboxController, 1),
+			xboxB = new JoystickButton(xboxController, 2), xboxX = new JoystickButton(xboxController, 3),
+			xboxY = new JoystickButton(xboxController, 4), xboxLT = new JoystickButton(xboxController, 5),
 			xboxRT = new JoystickButton(xboxController, 6);
 
 	/**

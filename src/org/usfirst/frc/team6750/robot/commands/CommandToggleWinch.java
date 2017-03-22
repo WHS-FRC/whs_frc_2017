@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * The speed can be set in the settings via the dash board
  */
-public class CommandToggleGearKnocker extends Command {
-	public CommandToggleGearKnocker() {
-		this.requires(RobotMap.gearLoaderSystem);
+public class CommandToggleWinch extends Command {
+	public CommandToggleWinch() {
+		this.requires(RobotMap.winchSystem);
 	}
 
 	@Override
 	public void initialize() {
-		RobotMap.gearLoaderSystem.toggle();
+		RobotMap.winchSystem.toggle();
 	}
 
 	@Override
