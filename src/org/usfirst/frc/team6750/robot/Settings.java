@@ -21,8 +21,6 @@ public class Settings {
 	 */
 	public static Position STARTING_POSITION = Position.RIGHT;
 
-	public static double FORWARD_LIMIT = 0.65D, BACKWARD_LIMIT = 0.65D, ROTATE_LIMIT = 0.65D;
-	
 	/**
 	 * Used to determine where the robot starts on the field
 	 */
