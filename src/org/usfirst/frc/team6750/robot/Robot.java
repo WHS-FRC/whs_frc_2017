@@ -33,7 +33,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	private void addDashboardSettings() {
-		SmartDashboard.putNumber("Starting Position", 0D);
 		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
