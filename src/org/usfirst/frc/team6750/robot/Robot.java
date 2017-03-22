@@ -116,7 +116,7 @@ public class Robot extends IterativeRobot {
 		}
 
 		if ((Math.abs(fastMoveAxis * SLOW_MOVE_MODIFIER)) > Math.abs(slowMoveAxis * SLOW_MOVE_MODIFIER)) {
-			moveSpeed = fastMoveAxis * SLOW_MOVE_MODIFIER;
+			moveSpeed = fastMoveAxis;
 		} else {
 			moveSpeed = (slowMoveAxis * SLOW_MOVE_MODIFIER);
 		}
