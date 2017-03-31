@@ -1,15 +1,10 @@
 package org.usfirst.frc.team6750.robot;
 
-import static org.usfirst.frc.team6750.robot.RobotMap.lg7;
-import static org.usfirst.frc.team6750.robot.RobotMap.lg8;
 import static org.usfirst.frc.team6750.robot.RobotMap.robotDrive;
 import static org.usfirst.frc.team6750.robot.RobotMap.xboxController;
 import static org.usfirst.frc.team6750.robot.Settings.SLOW_MOVE_MODIFIER;
 
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
-import org.usfirst.frc.team6750.robot.commands.CommandToggleWinch;
-import org.usfirst.frc.team6750.robot.commands.CommandWinchReverse;
-import org.usfirst.frc.team6750.robot.commands.SingleCommandGroup;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -29,7 +24,6 @@ public class Robot extends IterativeRobot {
 		robotDrive.setSafetyEnabled(true);
 
 		addDashboardSettings();
-		addCommands();
 	}
 
 	private void addDashboardSettings() {
@@ -37,15 +31,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
 		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
-
-		SmartDashboard.putNumber("Left Winch Motor", RobotMap.winchSystem.leftMotor.getSpeed());
-		SmartDashboard.putNumber("Right Winch Motor", RobotMap.winchSystem.rightMotor.getSpeed());
-	}
-
-	private void addCommands() {
-		lg7.whenPressed(new SingleCommandGroup(new CommandToggleWinch()));
-		lg8.whenPressed(new SingleCommandGroup(new CommandWinchReverse()));
-
 	}
 
 	@Override
@@ -82,15 +67,10 @@ public class Robot extends IterativeRobot {
 			updateSettings();
 			updateScheduler();
 
-			handleWinch();
 			drive();
 
 			Timer.delay(0.005D);
 		}
-	}
-
-	private void handleWinch() {
-		RobotMap.winchSystem.updateSpeed();
 	}
 
 	/**
@@ -120,12 +100,13 @@ public class Robot extends IterativeRobot {
 			moveSpeed = (slowMoveAxis * SLOW_MOVE_MODIFIER);
 		}
 
-		moveSpeed *= -1D; // Either the controller axes are backwards or the
+		moveSpeed *= 1D; // Either the controller axes are backwards or the
 							// motors are backwards
 		rotateSpeed *= -1D;
 
 		// Send move and rotate values to the RobotDrive
 		robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+		RobotMap.driveSystem.adjustJaguars();
 	}
 
 	/**
@@ -146,8 +127,5 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
 		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
-
-		SmartDashboard.putNumber("Left Winch Motor", RobotMap.winchSystem.leftMotor.getSpeed());
-		SmartDashboard.putNumber("Right Winch Motor", RobotMap.winchSystem.rightMotor.getSpeed());
 	}
 }

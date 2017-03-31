@@ -11,6 +11,6 @@ public class AutonomousCommandGroup extends CommandGroup {
 	public AutonomousCommandGroup() {
 		super("Autonomous Commands"); // 15 SECONDS!!
 		
-		addSequential(new CommandDrive(5D, 0.6D, 0D)); //TEMP
+		addSequential(new CommandDrive(7.5D, 0.6D, 0D)); //TEMP
 	}
 }

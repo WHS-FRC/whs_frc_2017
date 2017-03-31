@@ -45,6 +45,7 @@ public class CommandDrive extends Command {
 	@Override
 	public void execute() {
 		RobotMap.robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+		RobotMap.driveSystem.adjustJaguars();
 	}
 
 	/**
@@ -64,6 +65,9 @@ public class CommandDrive extends Command {
 	public void end() {
 		timer.stop();
 		RobotMap.robotDrive.arcadeDrive(0D, 0D);
+
+		RobotMap.driveSystem.backLeftMotor.setSpeed(0);
+		RobotMap.driveSystem.backRightMotor.setSpeed(0);
 	}
 
 	@Override

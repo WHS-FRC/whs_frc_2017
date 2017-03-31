@@ -1,7 +1,6 @@
 package org.usfirst.frc.team6750.robot;
 
 import org.usfirst.frc.team6750.robot.subsystems.DriveSystem;
-import org.usfirst.frc.team6750.robot.subsystems.WinchSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -14,22 +13,23 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class RobotMap {
 	/**
+	 * *gear catcher is in front
 	 * Used to globally define what motors are what
 	 * 
+	 * 3 is back right spark
+	 * 4 is front right jaguar
+	 * 0 is back left jaguar
+	 * 5 is front left spark
+	 * 
 	 * Also makes it easy to change the motors
+	 * 
 	 */
-	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 2, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4,
-			WINCH_LEFT_MOTOR = 5, WINCH_RIGHT_MOTOR = 6;
+	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 5, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4;
 
 	/**
 	 * Contains the motors used to drive
 	 */
 	public static DriveSystem driveSystem = new DriveSystem();
-
-	/**
-	 * Contains the winch motor used to knock gears into the loading slot
-	 */
-	public static WinchSystem winchSystem = new WinchSystem();
 
 	/**
 	 * Used to drive the robot
