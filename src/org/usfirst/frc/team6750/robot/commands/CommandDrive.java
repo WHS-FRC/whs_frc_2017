@@ -24,7 +24,7 @@ public class CommandDrive extends Command {
 		this.moveSpeed = moveSpeed;
 		this.rotateSpeed = rotateSpeed;
 
-		//this.requires(RobotMap.driveSystem);
+		this.requires(RobotMap.driveSystem);
 
 		System.err.println("MOVE SPEED: " + moveSpeed);
 	}
@@ -45,7 +45,6 @@ public class CommandDrive extends Command {
 	@Override
 	public void execute() {
 		RobotMap.robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
-		RobotMap.driveSystem.adjustJaguars();
 	}
 
 	/**

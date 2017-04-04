@@ -20,19 +20,9 @@ public class DriveSystem extends Subsystem {
 		backRightMotor = new Spark(RobotMap.BACK_RIGHT_MOTOR);
 		frontLeftMotor = new Spark(RobotMap.FRONT_LEFT_MOTOR);
 		frontRightMotor = new Jaguar(RobotMap.FRONT_RIGHT_MOTOR);
-		
-		//frontRightMotor.setInverted(true);
 	}
 
 	@Override
 	protected void initDefaultCommand() {
-	}
-	
-	public void adjustJaguars() {
-		backRightMotor.setSpeed(backRightMotor.getSpeed() * 1D); //spark
-		frontLeftMotor.setSpeed(frontLeftMotor.getSpeed() * 1D); //spark
-		
-		backLeftMotor.setSpeed(backLeftMotor.getSpeed() * 1D); //jaguar
-		frontRightMotor.setSpeed(frontRightMotor.getSpeed() * 1D); //jaguar
 	}
 }

@@ -1,8 +1,7 @@
 package org.usfirst.frc.team6750.robot;
 
-import static org.usfirst.frc.team6750.robot.RobotMap.robotDrive;
-import static org.usfirst.frc.team6750.robot.RobotMap.xboxController;
-import static org.usfirst.frc.team6750.robot.Settings.SLOW_MOVE_MODIFIER;
+import static org.usfirst.frc.team6750.robot.RobotMap.*;
+import static org.usfirst.frc.team6750.robot.Settings.*;
 
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
 
@@ -22,52 +21,46 @@ public class Robot extends IterativeRobot {
 		robotDrive.setExpiration(0.1D);
 
 		robotDrive.setSafetyEnabled(true);
-
-		addDashboardSettings();
-	}
-
-	private void addDashboardSettings() {
-		SmartDashboard.putNumber("Back Left Motor", RobotMap.driveSystem.backLeftMotor.getSpeed());
-		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
-		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
-		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
 	}
 
 	@Override
 	public void testInit() {
+		updateSettings();
 	}
 
 	@Override
 	public void testPeriodic() {
 		updateScheduler();
+
+		drive();
+		winch();
+
+		updateSettings();
 	}
 
 	@Override
 	public void autonomousInit() {
 		System.out.println("Autonomous Started`");
 
-		updateSettings();
 		new AutonomousCommandGroup().start();
 	}
 
 	@Override
 	public void autonomousPeriodic() {
-		updateSettings();
 		updateScheduler();
 	}
 
 	@Override
 	public void teleopInit() {
-		updateSettings();
 	}
 
 	@Override
 	public void teleopPeriodic() {
-		while (isOperatorControl() && isEnabled()) {
-			updateSettings();
+		while(isOperatorControl() && isEnabled()) {
 			updateScheduler();
 
 			drive();
+			winch();
 
 			Timer.delay(0.005D);
 		}
@@ -88,13 +81,13 @@ public class Robot extends IterativeRobot {
 
 		// Determines whether to use the fast axis or the slow axis based on
 		// which one is faster
-		if (Math.abs(fastRotateAxis) > Math.abs(slowRotateAxis * SLOW_MOVE_MODIFIER)) {
+		if(Math.abs(fastRotateAxis) > Math.abs(slowRotateAxis * SLOW_MOVE_MODIFIER)) {
 			rotateSpeed = fastRotateAxis;
 		} else {
 			rotateSpeed = (slowRotateAxis * SLOW_MOVE_MODIFIER);
 		}
 
-		if ((Math.abs(fastMoveAxis * SLOW_MOVE_MODIFIER)) > Math.abs(slowMoveAxis * SLOW_MOVE_MODIFIER)) {
+		if((Math.abs(fastMoveAxis * SLOW_MOVE_MODIFIER)) > Math.abs(slowMoveAxis * SLOW_MOVE_MODIFIER)) {
 			moveSpeed = fastMoveAxis;
 		} else {
 			moveSpeed = (slowMoveAxis * SLOW_MOVE_MODIFIER);
@@ -106,7 +99,18 @@ public class Robot extends IterativeRobot {
 
 		// Send move and rotate values to the RobotDrive
 		robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
-		RobotMap.driveSystem.adjustJaguars();
+	}
+
+	private void winch() {
+		int pov = xboxController.getPOV();
+
+		if(pov == 90) {
+			Settings.winchMotorSpeed += 0.1D;
+		} else if(pov == 180) {
+			Settings.winchMotorSpeed -= 0.1D;
+		}
+
+		RobotMap.winchSystem.winchMotor.setSpeed(Settings.winchMotorSpeed);
 	}
 
 	/**
@@ -127,5 +131,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Front Left Motor", RobotMap.driveSystem.frontLeftMotor.getSpeed());
 		SmartDashboard.putNumber("Back Right Motor", RobotMap.driveSystem.backRightMotor.getSpeed());
 		SmartDashboard.putNumber("Front Right Motor", RobotMap.driveSystem.frontRightMotor.getSpeed());
+		SmartDashboard.putNumber("Winch Motor", RobotMap.winchSystem.winchMotor.getSpeed());
 	}
 }

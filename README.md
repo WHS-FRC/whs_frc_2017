@@ -13,9 +13,5 @@ Controls:
 XBox Controller:
 	Left Joystick - Fast Movement
 	Right Joystick - Slow Movement
-	
-LG Controller:
-	Joystick Forward/Backward - Dumper Forward/Backward
-	Button 7 - Toggle Winch Motor
-	Button 8 - Toggle Winch Motor Reverse
-	Slider - Winch Motor Speed (Negative is 0%, Positive is 100%)
+	D-Pad Up - Increase winch speed
+	D-Pad Down - Decrease winch speed
