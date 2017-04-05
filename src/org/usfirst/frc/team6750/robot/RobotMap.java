@@ -17,15 +17,15 @@ public class RobotMap {
 	 * Gear catcher is the front
 	 * Used to globally define what motors are connected to which PWM
 	 * 
-	 * 3 is back right spark
+	 * 3 is middle middle spark
 	 * 4 is front right jaguar
 	 * 0 is back left jaguar
-	 * 5 is front left spark
+	 * 5 is front middle spark
 	 * 
 	 * Also makes it easy to change the motors
 	 * 
 	 */
-	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 5, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4, WINCH_MOTOR = 6;
+	public static final int BACK_LEFT_MOTOR = 0, FRONT_LEFT_MOTOR = 5, BACK_RIGHT_MOTOR = 3, FRONT_RIGHT_MOTOR = 4, WINCH_MOTOR = 8;
 
 	/**
 	 * Contains the motors used to drive
@@ -49,6 +49,4 @@ public class RobotMap {
 	 * Should be the only controller plugged in
 	 */
 	public static XboxController xboxController = new XboxController(0);
-
-	public static JoystickButton xboxA = new JoystickButton(xboxController, 1);
 }

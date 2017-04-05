@@ -1,7 +1,6 @@
 package org.usfirst.frc.team6750.robot;
 
 import static org.usfirst.frc.team6750.robot.RobotMap.*;
-import static org.usfirst.frc.team6750.robot.Settings.*;
 
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
 
@@ -25,17 +24,11 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void testInit() {
-		updateSettings();
 	}
 
 	@Override
 	public void testPeriodic() {
 		updateScheduler();
-
-		drive();
-		winch();
-
-		updateSettings();
 	}
 
 	@Override
@@ -58,59 +51,13 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		while(isOperatorControl() && isEnabled()) {
 			updateScheduler();
+			updateSettings();
 
-			drive();
-			winch();
+			RobotMap.driveSystem.update();
+			RobotMap.winchSystem.update();
 
 			Timer.delay(0.005D);
 		}
-	}
-
-	/**
-	 * Drives the robot
-	 */
-	private void drive() {
-		// Get axis values from the xbox controller
-		double fastRotateAxis = xboxController.getRawAxis(0);
-		double fastMoveAxis = xboxController.getRawAxis(1);
-		double slowRotateAxis = xboxController.getRawAxis(4);
-		double slowMoveAxis = xboxController.getRawAxis(5);
-
-		// Values that will eventually pass into the RobotDrive
-		double rotateSpeed = 0D, moveSpeed = 0D;
-
-		// Determines whether to use the fast axis or the slow axis based on
-		// which one is faster
-		if(Math.abs(fastRotateAxis) > Math.abs(slowRotateAxis * SLOW_MOVE_MODIFIER)) {
-			rotateSpeed = fastRotateAxis;
-		} else {
-			rotateSpeed = (slowRotateAxis * SLOW_MOVE_MODIFIER);
-		}
-
-		if((Math.abs(fastMoveAxis * SLOW_MOVE_MODIFIER)) > Math.abs(slowMoveAxis * SLOW_MOVE_MODIFIER)) {
-			moveSpeed = fastMoveAxis;
-		} else {
-			moveSpeed = (slowMoveAxis * SLOW_MOVE_MODIFIER);
-		}
-
-		moveSpeed *= 1D; // Either the controller axes are backwards or the
-							// motors are backwards
-		rotateSpeed *= -1D;
-
-		// Send move and rotate values to the RobotDrive
-		robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
-	}
-
-	private void winch() {
-		int pov = xboxController.getPOV();
-
-		if(pov == 90) {
-			Settings.winchMotorSpeed += 0.1D;
-		} else if(pov == 180) {
-			Settings.winchMotorSpeed -= 0.1D;
-		}
-
-		RobotMap.winchSystem.winchMotor.setSpeed(Settings.winchMotorSpeed);
 	}
 
 	/**
