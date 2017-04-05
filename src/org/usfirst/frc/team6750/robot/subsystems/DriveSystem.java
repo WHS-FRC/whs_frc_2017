@@ -62,8 +62,8 @@ public class DriveSystem extends Subsystem {
 			moveSpeed = slowMoveSpeed;
 		}
 
-		moveSpeed *= 1D;
-		rotateSpeed *= -1D;
+		moveSpeed *= 1D; //finally forward (battery is in the front)
+		rotateSpeed *= -1D; // rotate is always backwards
 
 		// Send move and rotate values to the RobotDrive
 		robotDrive.arcadeDrive(moveSpeed, rotateSpeed);

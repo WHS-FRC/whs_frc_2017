@@ -33,8 +33,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		System.out.println("Autonomous Started`");
-
 		new AutonomousCommandGroup().start();
 	}
 
