@@ -13,5 +13,5 @@ Controls:
 XBox Controller:
 	Left Joystick - Fast Movement
 	Right Joystick - Slow Movement
-	D-Pad Up - Increase winch speed
-	D-Pad Down - Decrease winch speed
+	Left Bumper - Turn On Winch
+	Right Bumper - Turn Off Winch

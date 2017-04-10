@@ -16,12 +16,15 @@ public class DriveSystem extends Subsystem {
 	 * The axes input from the slow joystick are multiplied by this to get the speed sent to the RobotDrive
 	 */
 	public static final double SLOW_MOVE_MODIFIER = 0.65D;
+	public Side frontSide;
 
 	public Jaguar backLeftMotor, frontRightMotor;
 	public Spark backRightMotor, frontLeftMotor;
 
 	public DriveSystem() {
 		super();
+
+		frontSide = Side.GEARCATCHER;
 
 		backLeftMotor = new Jaguar(RobotMap.BACK_LEFT_MOTOR);
 		backRightMotor = new Spark(RobotMap.BACK_RIGHT_MOTOR);
@@ -37,7 +40,7 @@ public class DriveSystem extends Subsystem {
 	 * Drives the robot
 	 */
 	public void update() {
-		// Get axis values from the xbox controller
+		// Get axis values from the xbox xboxController
 		double fastRotateAxis = xboxController.getRawAxis(0);
 		double fastMoveAxis = xboxController.getRawAxis(1);
 		double slowRotateAxis = xboxController.getRawAxis(4);
@@ -62,13 +65,31 @@ public class DriveSystem extends Subsystem {
 			moveSpeed = slowMoveSpeed;
 		}
 
-		moveSpeed *= 1D; //finally forward (battery is in the front)
-		rotateSpeed *= -1D; // rotate is always backwards
-
 		// Send move and rotate values to the RobotDrive
-		robotDrive.arcadeDrive(moveSpeed, rotateSpeed);
+		drive(moveSpeed, rotateSpeed);
 
-		adjustSpeeds();
+		//adjustSpeeds();
+	}
+
+	public void drive(double moveSpeed, double rotateSpeed) {
+		double directionMult = -1D;
+		
+		switch(frontSide) {
+		case GEARCATCHER: {
+			directionMult = -1D;
+			break;
+		}
+		case WINCH: {
+			directionMult = 1D;
+			break;
+		}
+		
+		default: {
+			break;
+		}
+		}
+		
+		robotDrive.arcadeDrive(moveSpeed * directionMult, -rotateSpeed);
 	}
 
 	/**
@@ -86,5 +107,9 @@ public class DriveSystem extends Subsystem {
 
 		backLeftMotor.setSpeed(backSpeed);
 		frontLeftMotor.setSpeed(frontSpeed);
+	}
+
+	public enum Side {
+		GEARCATCHER, WINCH;
 	}
 }

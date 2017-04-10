@@ -1,7 +1,5 @@
 package org.usfirst.frc.team6750.robot.subsystems;
 
-import static org.usfirst.frc.team6750.robot.RobotMap.*;
-
 import org.usfirst.frc.team6750.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Spark;
@@ -15,6 +13,7 @@ public class WinchSystem extends Subsystem {
 
 	public boolean on = false;
 	public double speed = 0D;
+	public boolean alive = false;
 
 	public WinchSystem() {
 		super();
@@ -27,22 +26,12 @@ public class WinchSystem extends Subsystem {
 	}
 
 	public void update() {
-		if(xboxController.getXButton()) {
-			speed = -1D;
-		}
-
-		if(xboxController.getBButton()) {
-			speed = 1D;
-		}
-
-		if(xboxController.getAButton()) {
-			on = false;
-		} else if(xboxController.getYButton()) {
-			on = true;
-		}
+		alive = winchMotor.isAlive();
 
 		if(on) {
 			winchMotor.setSpeed(speed);
+		} else {
+			winchMotor.setSpeed(0D);
 		}
 	}
 }
