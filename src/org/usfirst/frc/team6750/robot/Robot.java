@@ -5,7 +5,7 @@ import static org.usfirst.frc.team6750.robot.RobotMap.*;
 import org.usfirst.frc.team6750.robot.commands.AutonomousCommandGroup;
 import org.usfirst.frc.team6750.robot.commands.CommandSetWinchSpeed;
 import org.usfirst.frc.team6750.robot.commands.CommandToggleFront;
-import org.usfirst.frc.team6750.robot.commands.CommandToggleWinch;
+import org.usfirst.frc.team6750.robot.commands.CommandToggleWinchMotor;
 import org.usfirst.frc.team6750.robot.commands.SingleCommandGroup;
 import org.usfirst.frc.team6750.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team6750.robot.subsystems.DriveSystem.Side;
@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 		rBumper = new JoystickButton(xboxController, 6);
 		backButton = new JoystickButton(xboxController, 7);
 
-		buttonA.whenPressed(new SingleCommandGroup(new CommandToggleWinch()));
+		buttonA.whenPressed(new SingleCommandGroup(new CommandToggleWinchMotor()));
 		buttonX.whenPressed(new SingleCommandGroup(new CommandSetWinchSpeed(1, -0.1D)));
 		buttonB.whenPressed(new SingleCommandGroup(new CommandSetWinchSpeed(1, 0.1D)));
 		lBumper.whenPressed(new SingleCommandGroup(new CommandSetWinchSpeed(0, -1D)));
